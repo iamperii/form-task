@@ -11,6 +11,7 @@ export const Form = () => {
 	});
 	const [text, setText] = useState(false);
 	const [errors, setErrors] = useState({});
+	// console.log(errors);
 
 	const validateForm = () => {
 		const newErrors = {};
@@ -20,16 +21,17 @@ export const Form = () => {
 		if (!form.surname.trim()) {
 			newErrors.surname = 'Soyad mütləqdir.';
 		}
+		if (!form.comment.trim()) {
+			newErrors.comment = 'Şərh mütləqdir.';
+		}
 		if (!form.phone.trim() || !/^\+?[0-9]{10,15}$/.test(form.phone)) {
 			newErrors.phone = 'Telefon düzgün formatda olmalidir (+123456789).';
 		}
 		if (!form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
 			newErrors.email = 'Email düzgün formatda olmalidir.';
 		}
-		if (!form.comment.trim()) {
-			newErrors.comment = 'Şərh mütləqdir.';
-		}
 
+		// console.log(newErrors);
 		setErrors(newErrors);
 		return Object.keys(newErrors).length === 0;
 	};
@@ -74,7 +76,7 @@ export const Form = () => {
 						value={form.name}
 						onChange={handleChange}
 					/>
-					{errors.name && <small className="error">{errors.name}</small>}
+					{errors.name && <p className="error">{errors.name}</p>}
 				</label>
 				<label htmlFor="surname">
 					Soyad:
@@ -96,7 +98,7 @@ export const Form = () => {
 						value={form.phone}
 						onChange={handleChange}
 					/>
-					{errors.phone && <small className="error">{errors.phone}</small>}
+					{errors.phone && <p className="error">{errors.phone}</p>}
 				</label>
 				<label htmlFor="email">
 					Email:
@@ -107,7 +109,7 @@ export const Form = () => {
 						value={form.email}
 						onChange={handleChange}
 					/>
-					{errors.email && <small className="error">{errors.email}</small>}
+					{errors.email && <p className="error">{errors.email}</p>}
 				</label>
 				<label htmlFor="comment">
 					Şərh:
@@ -118,7 +120,7 @@ export const Form = () => {
 						value={form.comment}
 						onChange={handleChange}
 					/>
-					{errors.comment && <small className="error">{errors.comment}</small>}
+					{errors.comment && <p className="error">{errors.comment}</p>}
 				</label>
 				<button type="submit">Göndər</button>
 			</form>
